@@ -22,4 +22,6 @@ Route::get('/api', [studentController::class, 'index']);
 
 Route::post('/api/add', [studentController::class, 'add']);
 
-Route::get('api/{id}', [studentController::class,  'student']);
+//Route::get('api/{id}', [studentController::class,  'student']);
+
+Route::get('/api/delete/{id}', [studentController::class,  'delete']);

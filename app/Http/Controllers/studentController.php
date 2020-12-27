@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 
 use Illuminate\Http\Request;
+use PHPUnit\Framework\MockObject\Builder\Stub;
 
 class studentController extends Controller
 {
@@ -44,6 +45,22 @@ class studentController extends Controller
             return response()->json([
                 "message" => "Student Not Found",
             ], 400);
+        }
+    }
+
+
+    public function delete(Request $request, $id){
+        if(Student::where('id', $id)->exists()){
+            $student = Student::find($id);
+            $student -> delete();
+
+            return response()->json([
+                "message" => "Student Record Delete Successfully"
+            ], 202);
+        }else{
+            return response()->json([
+                "message" => "Student Not Found",
+            ], 404);
         }
     }
 }
