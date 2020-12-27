@@ -21,3 +21,5 @@ Route::get('/', function () {
 Route::get('/api', [studentController::class, 'index']);
 
 Route::post('/api/add', [studentController::class, 'add']);
+
+Route::get('api/{id}', [studentController::class,  'student']);

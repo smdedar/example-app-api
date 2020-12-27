@@ -22,7 +22,7 @@ class studentController extends Controller
     public function add(Request $request){
         $token = $request->session()->token();
         $token = csrf_token();
-        
+
         $student = new Student;
         $student->name = $request->name;
         $student->course = $request->course;
@@ -33,5 +33,17 @@ class studentController extends Controller
         ], 201);
     }
 
-
+    public function student($id){
+        //dd($id);
+        if(Student::where('id', $id)->exists()){
+            $student = Student::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+            //dd($student);
+            return response($student,200);
+        } else{
+            //return 'Not Found';
+            return response()->json([
+                "message" => "Student Not Found",
+            ], 400);
+        }
+    }
 }
